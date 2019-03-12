@@ -1,0 +1,14 @@
+--- vendor/magento/module-gift-card-account/Model/Giftcardaccount.php	2019-03-12 16:54:07.196524415 +0530
++++ vendor/magento/module-gift-card-account/Model/Giftcardaccount_New.php	2019-03-12 16:56:13.012146745 +0530
+@@ -391,7 +391,10 @@
+         $currentDate = new \DateTime('now', new \DateTimeZone($this->_localeDate->getConfigTimezone()));
+ 
+         if (!$this->getId()) {
+-            $this->setDateCreated($currentDate);
++            $this->setDateCreated(
++                $this->_localeDate->date($currentDate)
++                    ->format('Y-m-d')
++            );
+             if (!$this->hasCode()) {
+                 $this->_defineCode();
+             }
